@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo gallery of Varanasi - Ghats, temples, festivals, Ganga Aarti, Dev Diwali, street life, and cultural heritage.">
+    <title>Varanasi Photo Gallery | MyBanaras</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; box-shadow: var(--shadow-sm); transition: var(--transition-fast); }
+        .gallery-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .gallery-item img { width: 100%; height: 300px; object-fit: cover; display: block; transition: var(--transition-slow); }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; padding: 20px; transform: translateY(100%); transition: var(--transition-fast); }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        .lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .lightbox-content { max-width: 90%; max-height: 90%; position: relative; }
+        .lightbox-content img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 3rem; color: white; background: none; border: none; cursor: pointer; z-index: 10001; }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo"><img src="assets/mybanaras_logo.png" alt="MyBanaras Logo" class="logo-img"><span class="logo-text">MyBanaras</span></a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown"><a href="#" class="nav-link">Explore <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">About Banaras</a></li>
+                            <li><a href="ghats.html">Sacred Ghats</a></li>
+                            <li><a href="temples.html">Temples</a></li>
+                            <li><a href="culture.html">Culture</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="festivals.html" class="nav-link">Festivals</a></li>
+                    <li><a href="panchang.html" class="nav-link">Panchang</a></li>
+                    <li><a href="travel-guide.html" class="nav-link">Travel Guide</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="height: 50vh; background: linear-gradient(135deg, var(--ganges-blue) 0%, #5FA8B8 100%);">
+        <div class="hero-content"><div class="hero-text animate-fade-in">
+                <h1 class="hero-title">Photo Gallery</h1>
+                <p class="hero-subtitle">Glimpses of Eternal Banaras</p>
+            </div></div>
+    </section>
+
+    <main style="padding: 80px 0;">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-subtitle">Visual Journey</span>
+                <h2 class="section-title">Banaras in Pictures</h2>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="gallery-grid" style="margin-top: 60px;">
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/Dashashwamedh.png" alt="Dashashwamedh Ghat at Sunrise">
+                    <div class="gallery-overlay"><h3>Dashashwamedh Ghat</h3><p>Morning prayers at sunrise</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/dev_dipawali.png" alt="Dev Diwali Celebrations">
+                    <div class="gallery-overlay"><h3>Dev Diwali</h3><p>Million diyas lighting the ghats</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/contact.png" alt="Ganga Aarti Evening">
+                    <div class="gallery-overlay"><h3>Evening Ganga Aarti</h3><p>Spiritual spectacle</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/kashivishvnath.png" alt="Kashi Vishwanath Temple">
+                    <div class="gallery-overlay"><h3>Kashi Vishwanath</h3><p>The Golden Temple</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/manikarnika ghat.png" alt="Ancient Ghats">
+                    <div class="gallery-overlay"><h3>Sacred Ghats</h3><p>88 steps to liberation</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/banarasi saree.png" alt="Banarasi Silk">
+                    <div class="gallery-overlay"><h3>Banarasi Silk</h3><p>Golden threads of tradition</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/ganga.png" alt="Boat Rides">
+                    <div class="gallery-overlay"><h3>Boat Rides</h3><p>Exploring ghats by water</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/vishvnath_temple.png" alt="Temple Architecture">
+                    <div class="gallery-overlay"><h3>Temple Architecture</h3><p>Ancient spiritual edifices</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/holi_hai.png" alt="Holi Festival">
+                    <div class="gallery-overlay"><h3>Holi Celebrations</h3><p>Festival of colors</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/Panchganga Ghat.png" alt="Panchganga Ghat">
+                    <div class="gallery-overlay"><h3>Panchganga Ghat</h3><p>Confluence of five rivers</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/Man Mandir Ghat.png" alt="Man Mandir Observatory">
+                    <div class="gallery-overlay"><h3>Man Mandir</h3><p>Ancient observatory</p></div>
+                </div>
+                <div class="gallery-item gallery-image animate-on-scroll">
+                    <img src="assets/vns_chaat.png" alt="Street Life">
+                    <div class="gallery-overlay"><h3>Street Life</h3><p>Vibrant lanes of Banaras</p></div>
+                </div>
+            </div>
+
+            <div class="spiritual-quote animate-on-scroll" style="margin-top: 60px;">
+                <p><strong>Note:</strong> All images in this gallery are sourced from our local assets collection, showcasing authentic moments and scenes from Varanasi.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom"><p>&copy; 2024 MyBanaras.com. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <button class="scroll-to-top" id="scrollToTop"><i class="fas fa-arrow-up"></i></button>
+    <script src="js/main.js"></script>
+    <script>
+        // Gallery Lightbox Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryImages = document.querySelectorAll('.gallery-image img');
+            
+            galleryImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    // Create lightbox overlay
+                    const lightbox = document.createElement('div');
+                    lightbox.className = 'lightbox';
+                    lightbox.innerHTML = `
+                        <div class="lightbox-content">
+                            <button class="lightbox-close">&times;</button>
+                            <img src="${this.src}" alt="${this.alt}">
+                        </div>
+                    `;
+                    
+                    // Add lightbox to page
+                    document.body.appendChild(lightbox);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Close lightbox functionality
+                    const closeBtn = lightbox.querySelector('.lightbox-close');
+                    closeBtn.addEventListener('click', function() {
+                        lightbox.remove();
+                        document.body.style.overflow = '';
+                    });
+                    
+                    // Close on background click
+                    lightbox.addEventListener('click', function(e) {
+                        if (e.target === lightbox) {
+                            lightbox.remove();
+                            document.body.style.overflow = '';
+                        }
+                    });
+                    
+                    // Close on Escape key
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape') {
+                            lightbox.remove();
+                            document.body.style.overflow = '';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hindu Panchang Calendar for Varanasi - Check today's tithi, nakshatra, auspicious timings, festivals, and muhurat.">
+    <title>Hindu Panchang Calendar - Daily Tithi & Muhurat | MyBanaras</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .panchang-hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .panchang-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/panchange.png') center/cover;
+            filter: blur(8px);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo"><img src="assets/mybanaras_logo.png" alt="MyBanaras Logo" class="logo-img"><span class="logo-text">MyBanaras</span></a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown"><a href="#" class="nav-link">Explore <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">About Banaras</a></li>
+                            <li><a href="ghats.html">Sacred Ghats</a></li>
+                            <li><a href="temples.html">Temples</a></li>
+                            <li><a href="culture.html">Culture</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="festivals.html" class="nav-link">Festivals</a></li>
+                    <li><a href="panchang.html" class="nav-link active">Panchang</a></li>
+                    <li><a href="travel-guide.html" class="nav-link">Travel Guide</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero panchang-hero" style="height: 50vh; background: linear-gradient(135deg, rgba(212, 175, 55, 0.85) 0%, rgba(255, 153, 51, 0.85) 100%);">
+        <div class="hero-overlay"></div>
+        <div class="hero-content"><div class="hero-text animate-fade-in">
+                <h1 class="hero-title">Hindu Panchang</h1>
+                <p class="hero-subtitle">Daily Calendar & Auspicious Timings</p>
+            </div></div>
+    </section>
+
+    <main style="padding: 80px 0;">
+        <div class="container">
+            <section style="max-width: 900px; margin: 0 auto;">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">Today's Panchang</span>
+                    <h2 class="section-title" id="currentDate">Loading...</h2>
+                    <div class="title-divider"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); margin-top: 40px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-calendar-day" style="font-size: 2.5rem; color: var(--saffron); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Tithi</h4>
+                            <p style="color: var(--terracotta); font-weight: 600;">Shukla Paksha Dvitiya</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-star" style="font-size: 2.5rem; color: var(--ganges-blue); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Nakshatra</h4>
+                            <p style="color: var(--terracotta); font-weight: 600;">Rohini</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-sun" style="font-size: 2.5rem; color: var(--deep-gold); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Yoga</h4>
+                            <p style="color: var(--terracotta); font-weight: 600;">Siddha Yoga</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-moon" style="font-size: 2.5rem; color: var(--saffron); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Karana</h4>
+                            <p style="color: var(--terracotta); font-weight: 600;">Bava</p>
+                        </div>
+                    </div>
+                </div>
+
+                <section style="margin-top: 60px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--dark-brown); margin-bottom: 30px; text-align: center;">Auspicious Timings (Muhurat)</h3>
+                    <div style="display: grid; gap: 20px;">
+                        <div class="testimonial-card animate-on-scroll">
+                            <h4 style="color: var(--saffron); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-sun-rise"></i> Sunrise & Sunset</h4>
+                            <p><strong>Sunrise:</strong> 06:15 AM | <strong>Sunset:</strong> 06:30 PM</p>
+                        </div>
+                        <div class="testimonial-card animate-on-scroll">
+                            <h4 style="color: var(--deep-gold); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-clock"></i> Abhijit Muhurat (Auspicious)</h4>
+                            <p><strong>Time:</strong> 11:45 AM - 12:33 PM</p>
+                            <p style="font-size: 0.9rem; color: var(--gray-medium); margin-top: 5px;">Best time for important work and new beginnings</p>
+                        </div>
+                        <div class="testimonial-card animate-on-scroll">
+                            <h4 style="color: var(--terracotta); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-times-circle"></i> Rahu Kaal (Inauspicious)</h4>
+                            <p><strong>Time:</strong> 04:30 PM - 06:00 PM</p>
+                            <p style="font-size: 0.9rem; color: var(--gray-medium); margin-top: 5px;">Avoid starting new ventures during this period</p>
+                        </div>
+                        <div class="testimonial-card animate-on-scroll">
+                            <h4 style="color: var(--ganges-blue); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-praying-hands"></i> Ganga Aarti Timings</h4>
+                            <p><strong>Morning:</strong> 5:30 AM (Assi Ghat) | <strong>Evening:</strong> 7:00 PM (Dashashwamedh Ghat)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section style="margin-top: 60px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--dark-brown); margin-bottom: 30px; text-align: center;">Upcoming Festivals</h3>
+                    <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-md);">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px; border-bottom: 1px solid var(--cream); display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="fas fa-fire" style="color: var(--saffron); margin-right: 10px;"></i><strong>Dev Diwali</strong></span>
+                                <span style="color: var(--gray-medium);">November 15, 2024</span>
+                            </li>
+                            <li style="padding: 15px; border-bottom: 1px solid var(--cream); display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="fas fa-om" style="color: var(--saffron); margin-right: 10px;"></i><strong>Mahashivratri</strong></span>
+                                <span style="color: var(--gray-medium);">March 8, 2025</span>
+                            </li>
+                            <li style="padding: 15px; border-bottom: 1px solid var(--cream); display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="fas fa-palette" style="color: var(--saffron); margin-right: 10px;"></i><strong>Holi</strong></span>
+                                <span style="color: var(--gray-medium);">March 25, 2025</span>
+                            </li>
+                            <li style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="fas fa-fire-alt" style="color: var(--saffron); margin-right: 10px;"></i><strong>Ganga Mahotsav</strong></span>
+                                <span style="color: var(--gray-medium);">November 2025</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="spiritual-quote animate-on-scroll" style="margin-top: 60px;">
+                    <i class="fas fa-info-circle"></i>
+                    <p><strong>Note:</strong> Panchang timings are calculated for Varanasi (25.3176° N, 82.9739° E). For accurate personalized panchang, consult local pandits or astrologers. All times mentioned are in Indian Standard Time (IST).</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-primary print-button"><i class="fas fa-print"></i> Print Panchang</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom"><p>&copy; 2024 MyBanaras.com. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <button class="scroll-to-top" id="scrollToTop"><i class="fas fa-arrow-up"></i></button>
+    <script src="js/main.js"></script>
+    <script>
+        // Display current date
+        const dateEl = document.getElementById('currentDate');
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
