@@ -11,6 +11,40 @@ A premium, fully-featured website showcasing the spiritual and cultural essence 
 
 **Production URL:** `https://mybanaras.com` (Ready to deploy)
 
+## 🧭 Table of Contents
+- [Live Website](#-live-website)
+- [Quick Start](#-quick-start)
+- [Features Implemented](#-features-implemented)
+- [Project Structure](#-project-structure)
+- [Local Preview & Development](#-local-preview--development)
+- [Deployment Instructions](#-deployment-instructions)
+- [Domain Setup](#-domain-setup-mybanarascom)
+- [SEO Optimization Guide](#-seo-optimization-guide)
+- [Monetization Setup](#-monetization-setup)
+- [Target Keywords & SEO Strategy](#-target-keywords--seo-strategy)
+- [Performance Metrics](#-performance-metrics)
+- [Regular Maintenance](#-regular-maintenance)
+- [Customization Guide](#-customization-guide)
+- [Color Customization](#-color-customization)
+- [Browser Compatibility](#-browser-compatibility)
+- [Troubleshooting](#-troubleshooting)
+- [Features Not Yet Implemented](#-features-not-yet-implemented)
+- [Support & Contact](#-support--contact)
+- [License & Attribution](#-license--attribution)
+- [Deployment Checklist](#-deployment-checklist)
+- [Success Metrics](#-success-metrics)
+- [Next Steps](#-next-steps)
+- [Thank You](#-thank-you)
+
+---
+
+## ⚡ Quick Start
+
+If you just need the fastest path to launch, start with [QUICK-START.md](./QUICK-START.md). It distills the must-do tasks and recommended deployment path into a five-minute checklist. In short:
+1. Update contact details, WhatsApp links, and social URLs across the HTML pages.
+2. Deploy via Netlify (drag & drop) or your preferred static hosting provider.
+3. Submit your sitemap to Google Search Console and enable analytics tracking.
+
 ---
 
 ## ✨ Features Implemented
@@ -128,6 +162,28 @@ mybanaras/
 │   └── main.js           # Main JavaScript file
 └── README.md             # This file
 ```
+
+---
+
+## 🧑‍💻 Local Preview & Development
+
+The project is a static site, so you can preview updates locally with any lightweight server. Pick whichever option matches your tooling:
+
+### Option 1: VS Code Live Server (Recommended)
+1. Install the **Live Server** extension.
+2. Right-click `index.html` and choose **Open with Live Server**.
+3. Your default browser opens `http://127.0.0.1:5500/` (or similar) and auto-reloads on save.
+
+### Option 2: Node.js `http-server`
+1. Install Node.js, then run `npm install --global http-server`.
+2. From the project root, start the server with `http-server -c-1`.
+3. Visit `http://localhost:8080` to browse every page.
+
+### Option 3: Python `http.server`
+1. With Python 3 installed, run `python -m http.server 8080` in the project root.
+2. Navigate to `http://localhost:8080`.
+
+> Tip: Keep `index.html` open in a second tab while editing other pages so you can jump through the site quickly.
 
 ---
 
@@ -584,6 +640,6 @@ Thank you for choosing MyBanaras.com! This premium website is ready to deploy an
 
 ---
 
-**Last Updated:** October 24, 2024  
-**Version:** 1.0.0  
+**Last Updated:** November 3, 2025  
+**Version:** 1.0.1 (Documentation refresh)  
 **Status:** Production Ready ✅
