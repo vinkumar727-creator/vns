@@ -74,36 +74,51 @@
                 <div style="background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); margin-top: 40px;">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
                         <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-calendar-week" style="font-size: 2.5rem; color: var(--deep-gold); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Day</h4>
+                            <p id="panchangDay" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
                             <i class="fas fa-calendar-day" style="font-size: 2.5rem; color: var(--saffron); margin-bottom: 10px;"></i>
                             <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Tithi</h4>
-                            <p style="color: var(--terracotta); font-weight: 600;">Shukla Paksha Dvitiya</p>
+                            <p id="panchangTithi" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
                         </div>
                         <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
                             <i class="fas fa-star" style="font-size: 2.5rem; color: var(--ganges-blue); margin-bottom: 10px;"></i>
                             <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Nakshatra</h4>
-                            <p style="color: var(--terracotta); font-weight: 600;">Rohini</p>
-                        </div>
-                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
-                            <i class="fas fa-sun" style="font-size: 2.5rem; color: var(--deep-gold); margin-bottom: 10px;"></i>
-                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Yoga</h4>
-                            <p style="color: var(--terracotta); font-weight: 600;">Siddha Yoga</p>
+                            <p id="panchangNakshatra" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
                         </div>
                         <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
                             <i class="fas fa-moon" style="font-size: 2.5rem; color: var(--saffron); margin-bottom: 10px;"></i>
                             <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Karana</h4>
-                            <p style="color: var(--terracotta); font-weight: 600;">Bava</p>
+                            <p id="panchangKarna" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-sun" style="font-size: 2.5rem; color: var(--deep-gold); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Yoga</h4>
+                            <p id="panchangYoga" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-bahai" style="font-size: 2.5rem; color: var(--ganges-blue); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Raasi</h4>
+                            <p id="panchangRaasi" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
+                        </div>
+                        <div class="animate-on-scroll" style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                            <i class="fas fa-compass" style="font-size: 2.5rem; color: var(--deep-gold); margin-bottom: 10px;"></i>
+                            <h4 style="color: var(--dark-brown); margin-bottom: 5px;">Ayanamsa</h4>
+                            <p id="panchangAyanamsa" style="color: var(--terracotta); font-weight: 600;">Loading...</p>
                         </div>
                     </div>
                 </div>
 
                 <section style="margin-top: 60px;">
-                    <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--dark-brown); margin-bottom: 30px; text-align: center;">Auspicious Timings (Muhurat)</h3>
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--dark-brown); margin-bottom: 30px; text-align: center;">Auspicious Timings</h3>
                     <div style="display: grid; gap: 20px;">
                         <div class="testimonial-card animate-on-scroll">
                             <h4 style="color: var(--saffron); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-sun-rise"></i> Sunrise & Sunset</h4>
-                            <p><strong>Sunrise:</strong> 06:15 AM | <strong>Sunset:</strong> 06:30 PM</p>
+                            <p><strong>Sunrise:</strong> <span id="sunriseTime">Loading...</span> | <strong>Sunset:</strong> <span id="sunsetTime">Loading...</span></p>
                         </div>
-                        <div class="testimonial-card animate-on-scroll">
+                        <!-- <div class="testimonial-card animate-on-scroll">
                             <h4 style="color: var(--deep-gold); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-clock"></i> Abhijit Muhurat (Auspicious)</h4>
                             <p><strong>Time:</strong> 11:45 AM - 12:33 PM</p>
                             <p style="font-size: 0.9rem; color: var(--gray-medium); margin-top: 5px;">Best time for important work and new beginnings</p>
@@ -112,10 +127,10 @@
                             <h4 style="color: var(--terracotta); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-times-circle"></i> Rahu Kaal (Inauspicious)</h4>
                             <p><strong>Time:</strong> 04:30 PM - 06:00 PM</p>
                             <p style="font-size: 0.9rem; color: var(--gray-medium); margin-top: 5px;">Avoid starting new ventures during this period</p>
-                        </div>
+                        </div> -->
                         <div class="testimonial-card animate-on-scroll">
                             <h4 style="color: var(--ganges-blue); font-size: 1.2rem; margin-bottom: 10px;"><i class="fas fa-praying-hands"></i> Ganga Aarti Timings</h4>
-                            <p><strong>Morning:</strong> 5:30 AM (Assi Ghat) | <strong>Evening:</strong> 7:00 PM (Dashashwamedh Ghat)</p>
+                            <p><strong>Morning:</strong> Around 5:00 AM in summer and 5:30 AM in winter (Assi Ghat) | <strong>Evening:</strong> Around 7:00 PM in summer and 6:00 PM in winter (Dashashwamedh Ghat)</p>
                         </div>
                     </div>
                 </section>
@@ -156,7 +171,53 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const listEl = document.getElementById('upcomingFestivalsList');
-            if (!listEl || typeof panchang === 'undefined') {
+            const summaryEls = {
+                day: document.getElementById('panchangDay'),
+                tithi: document.getElementById('panchangTithi'),
+                nakshatra: document.getElementById('panchangNakshatra'),
+                karna: document.getElementById('panchangKarna'),
+                yoga: document.getElementById('panchangYoga'),
+                raasi: document.getElementById('panchangRaasi'),
+                ayanamsa: document.getElementById('panchangAyanamsa')
+            };
+
+function getSunriseSunset(date, lat, lng) {
+                const rad = Math.PI / 180;
+                const day = date.getDate();
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();
+                const n = Math.floor(275 * month / 9) - Math.floor((month + 9) / 12) * (1 + Math.floor((year - 4 * Math.floor(year / 4) + 2) / 3)) + day - 30;
+                const longitude = lng / 360;
+                const latitude = lat * rad;
+                const declination = 23.45 * rad * Math.sin(rad * (284 + n) * 360 / 365.25);
+                const hourAngle = Math.acos((Math.sin(-0.83 * rad) - Math.sin(latitude) * Math.sin(declination)) / (Math.cos(latitude) * Math.cos(declination)));
+                const sunrise = 12 - hourAngle / rad * 4 / 60 - longitude;
+                const sunset = 12 + hourAngle / rad * 4 / 60 - longitude;
+                const sunriseTime = new Date(date);
+                sunriseTime.setHours(Math.floor(sunrise), Math.floor((sunrise % 1) * 60));
+                const sunsetTime = new Date(date);
+                sunsetTime.setHours(Math.floor(sunset), Math.floor((sunset % 1) * 60));
+                return { sunrise: sunriseTime, sunset: sunsetTime };
+            }
+
+            const setSummaryValues = values => {
+                if (!values) {
+                    return;
+                }
+                const fallback = 'Unavailable';
+                if (summaryEls.day) summaryEls.day.textContent = values.day ?? fallback;
+                if (summaryEls.tithi) summaryEls.tithi.textContent = values.tithi ?? fallback;
+                if (summaryEls.nakshatra) summaryEls.nakshatra.textContent = values.nakshatra ?? fallback;
+                if (summaryEls.karna) summaryEls.karna.textContent = values.karna ?? fallback;
+                if (summaryEls.yoga) summaryEls.yoga.textContent = values.yoga ?? fallback;
+                if (summaryEls.raasi) summaryEls.raasi.textContent = values.raasi ?? fallback;
+                if (summaryEls.ayanamsa) summaryEls.ayanamsa.textContent = values.ayanamsa ?? fallback;
+            };
+
+            const setSummaryUnavailable = () => setSummaryValues({});
+
+            if (typeof panchang === 'undefined') {
+                setSummaryUnavailable();
                 return;
             }
 
@@ -227,7 +288,29 @@
                 return IST_OFFSET_MINUTES;
             };
 
+            let summaryUpdated = false;
+
             try {
+                const summaryDate = new Date(baseDate);
+                panchang.calculate(summaryDate, () => {
+                    setSummaryValues({
+                        day: panchang?.Day?.name,
+                        tithi: panchang?.Tithi?.name,
+                        nakshatra: panchang?.Nakshatra?.name,
+                        karna: panchang?.Karna?.name,
+                        yoga: panchang?.Yoga?.name,
+                        raasi: panchang?.Raasi?.name,
+                        ayanamsa: panchang?.Ayanamsa?.name
+                    });
+                    summaryUpdated = true;
+
+                    const sunTimes = getSunriseSunset(summaryDate, 25.3176, 82.9739);
+                    const sunriseEl = document.getElementById('sunriseTime');
+                    const sunsetEl = document.getElementById('sunsetTime');
+                    if (sunriseEl) sunriseEl.textContent = sunTimes.sunrise.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+                    if (sunsetEl) sunsetEl.textContent = sunTimes.sunset.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+                });
+
                 for (let dayOffset = 0; dayOffset < MAX_LOOKAHEAD_DAYS && events.length < MAX_EVENTS; dayOffset++) {
                     const iterDate = new Date(baseDate);
                     iterDate.setDate(baseDate.getDate() + dayOffset);
@@ -283,9 +366,18 @@
                     });
                 }
             } catch (error) {
+                setSummaryUnavailable();
                 console.error('Panchang festival calculation failed', error);
             } finally {
                 Date.prototype.getTimezoneOffset = originalOffsetFn;
+            }
+
+            if (!summaryUpdated) {
+                setSummaryUnavailable();
+            }
+
+            if (!listEl) {
+                return;
             }
 
             listEl.innerHTML = '';
