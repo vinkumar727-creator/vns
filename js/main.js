@@ -12,28 +12,39 @@ const scrollToTopBtn = document.getElementById('scrollToTop');
 const newsletterForm = document.getElementById('newsletterForm');
 
 // ============================================
-// Sticky Header on Scroll
+// Sticky Header on Scroll (rAF-throttled)
 // ============================================
 let lastScrollTop = 0;
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    
-    // Add scrolled class for shrinking effect
-    if (scrollTop > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+let scrollTicking = false;
+let scrollIdleTimer = null;
+
+const updateScrollUI = () => {
+    const scrollTop = window.scrollY || 0;
+
+    document.body.classList.add('is-scrolling');
+    clearTimeout(scrollIdleTimer);
+    scrollIdleTimer = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+    }, 140);
+
+    if (header) {
+        header.classList.toggle('scrolled', scrollTop > 50);
     }
-    
-    // Show/hide scroll to top button
-    if (scrollTop > 500) {
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
+
+    if (scrollToTopBtn) {
+        scrollToTopBtn.classList.toggle('visible', scrollTop > 500);
     }
-    
+
     lastScrollTop = scrollTop;
-});
+    scrollTicking = false;
+};
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(updateScrollUI);
+    }
+}, { passive: true });
 
 // ============================================
 // Mobile Menu Toggle
@@ -86,6 +97,7 @@ if (scrollToTopBtn) {
 // ============================================
 // Animate on Scroll
 // ============================================
+// Initialize animate on scroll with staggered delays
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-on-scroll');
     
@@ -93,20 +105,138 @@ const animateOnScroll = () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
     });
     
-    elements.forEach(element => {
+    elements.forEach((element, index) => {
+        const parent = element.closest('.stats-grid, .features-grid, .testimonials-grid');
+        const staggerIndex = parent
+            ? Array.from(parent.children).indexOf(element)
+            : index % 6;
+        element.style.setProperty('--scroll-delay', `${staggerIndex * 45}ms`);
         observer.observe(element);
     });
 };
 
 // Initialize animate on scroll
 animateOnScroll();
+
+// ============================================
+// Logo Mark Wrapper (blends PNG white bg)
+// ============================================
+const initLogoMarks = () => {
+    document.querySelectorAll('.logo-img, .footer-logo-img').forEach(img => {
+        if (img.closest('.logo-mark')) return;
+
+        const isFooter = img.classList.contains('footer-logo-img');
+        const wrap = document.createElement('span');
+        wrap.className = isFooter ? 'logo-mark logo-mark-footer' : 'logo-mark';
+        wrap.setAttribute('aria-hidden', isFooter ? 'true' : 'true');
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+    });
+};
+
+initLogoMarks();
+
+// ============================================
+const initHeroEffects = () => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    const run = () => {
+        document.querySelectorAll('.hero').forEach(hero => {
+            if (!reduced && !isMobile && !hero.querySelector('.hero-glow-1')) {
+                ['hero-glow-1', 'hero-glow-2'].forEach(cls => {
+                    const glow = document.createElement('div');
+                    glow.className = `hero-glow ${cls}`;
+                    glow.setAttribute('aria-hidden', 'true');
+                    hero.insertBefore(glow, hero.firstChild);
+                });
+            }
+
+            if (!reduced && !isMobile && !hero.querySelector('.hero-particles')) {
+                const container = document.createElement('div');
+                container.className = 'hero-particles';
+                container.setAttribute('aria-hidden', 'true');
+
+                for (let i = 0; i < 5; i++) {
+                    const particle = document.createElement('span');
+                    particle.className = 'hero-particle';
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.animationDuration = `${12 + Math.random() * 10}s`;
+                    particle.style.animationDelay = `${Math.random() * 6}s`;
+                    particle.style.width = particle.style.height = `${2 + Math.random() * 2}px`;
+                    container.appendChild(particle);
+                }
+
+                hero.insertBefore(container, hero.firstChild);
+            }
+        });
+    };
+
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(run, { timeout: 2000 });
+    } else {
+        setTimeout(run, 400);
+    }
+
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            const stats = document.querySelector('.stats-section');
+            (stats || document.querySelector('.intro-section'))?.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+};
+
+initHeroEffects();
+
+// ============================================
+// Premium Card Tilt Effect
+// ============================================
+const initCardTilt = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const setup = () => {
+        document.querySelectorAll('.feature-card').forEach(card => {
+            let tiltRaf = null;
+
+            card.addEventListener('mousemove', (e) => {
+                if (tiltRaf) return;
+                tiltRaf = requestAnimationFrame(() => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    card.style.transform = `perspective(800px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-6px)`;
+                    tiltRaf = null;
+                });
+            }, { passive: true });
+
+            card.addEventListener('mouseleave', () => {
+                if (tiltRaf) {
+                    cancelAnimationFrame(tiltRaf);
+                    tiltRaf = null;
+                }
+                card.style.transform = '';
+            });
+        });
+    };
+
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(setup, { timeout: 2500 });
+    } else {
+        setTimeout(setup, 600);
+    }
+};
+
+initCardTilt();
 
 // ============================================
 // Counter Animation for Stats
@@ -239,8 +369,20 @@ const loadWeather = async () => {
     }
 };
 
-// Load weather on page load
-loadWeather();
+// Load weather after first paint / idle to avoid blocking TTI
+const scheduleWeather = () => {
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => loadWeather(), { timeout: 3000 });
+    } else {
+        setTimeout(loadWeather, 800);
+    }
+};
+
+if (document.readyState === 'complete') {
+    scheduleWeather();
+} else {
+    window.addEventListener('load', scheduleWeather, { once: true });
+}
 
 // ============================================
 // Newsletter Form
@@ -525,138 +667,40 @@ console.log('%cExplore the sacred ghats, ancient temples, and timeless tradition
 // Premium Card Tilt Effect (Mouse Move Animation)
 // ============================================
 const initCardTiltEffect = () => {
-    const cards = document.querySelectorAll('.feature-card, .stat-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg tilt
-            const rotateY = ((x - centerX) / centerX) * 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-        });
-    });
+    // Disabled — duplicate of initCardTilt; caused competing transforms
 };
 
 // ============================================
 // Parallax Scroll Effect for Hero Section
 // ============================================
 const initParallaxEffect = () => {
-    const heroSection = document.querySelector('.hero');
-    
-    if (!heroSection) return;
-    
-    // Skip parallax effect on blog page as it interferes with background image
-    if (window.location.pathname.includes('blog.html')) return;
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        
-        // Move hero background slower than scroll
-        heroSection.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-    });
+    // Disabled — translating .hero on scroll caused visible scroll jank
 };
 
 // ============================================
 // Staggered Animation on Scroll
 // ============================================
 const initStaggeredAnimation = () => {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                    entry.target.style.animation = `slideInUp 0.6s ease forwards`;
-                }, index * 100); // Stagger by 100ms
-                
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    // Observe feature cards
-    document.querySelectorAll('.feature-card').forEach(card => {
-        observer.observe(card);
-    });
-    
-    // Observe stat cards
-    document.querySelectorAll('.stat-card').forEach(card => {
-        observer.observe(card);
-    });
+    // Disabled — duplicate IntersectionObserver conflicted with animateOnScroll
 };
 
 // ============================================
 // Mouse Cursor Trail Effect (Premium)
 // ============================================
 const initCursorTrail = () => {
-    const cards = document.querySelectorAll('.feature-card, .stat-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Create glow effect at cursor position
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
+    // Disabled — CSS variable updates on mousemove are unnecessary during scroll
 };
 
 // ============================================
 // Smooth Scroll Reveal with Different Effects
 // ============================================
 const initAdvancedScrollReveal = () => {
-    const revealElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add random delay for more organic feel
-                const delay = Math.random() * 200;
-                
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                    
-                    // Add bounce effect
-                    entry.target.style.animation = 'slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-                }, delay);
-                
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -80px 0px'
-    });
-    
-    revealElements.forEach(el => revealObserver.observe(el));
+    // Disabled — re-applying slideInUp animations fought CSS transitions and caused flicker
 };
 
 // Initialize all premium animations
 document.addEventListener('DOMContentLoaded', () => {
-    initCardTiltEffect();
-    initParallaxEffect();
-    initStaggeredAnimation();
-    initCursorTrail();
-    initAdvancedScrollReveal();
+    // Heavy scroll effects intentionally left off for smooth scrolling
 });
 
 // ============================================
