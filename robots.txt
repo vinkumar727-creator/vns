@@ -1,28 +1,15 @@
 # robots.txt for MyBanaras.com
-
 User-agent: *
 Allow: /
 
-# Allow all search engines to index the site
-Disallow:
+Sitemap: https://www.mybanaras.com/sitemap.xml
 
-# Sitemap location
-Sitemap: https://mybanaras.com/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Specific rules for common bots
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Slurp
-Allow: /
-
-# Block AI training bots (optional)
 User-agent: GPTBot
 Disallow: /
 
@@ -30,4 +17,7 @@ User-agent: ChatGPT-User
 Disallow: /
 
 User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
 Disallow: /
