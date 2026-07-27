@@ -475,9 +475,10 @@ const initSocialShare = () => {
                 case 'twitter':
                     shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
                     break;
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${title}%20${url}`;
-                    break;
+                // WhatsApp connect disabled
+                // case 'whatsapp':
+                //     shareUrl = `https://wa.me/?text=${title}%20${url}`;
+                //     break;
                 case 'linkedin':
                     shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
                     break;
